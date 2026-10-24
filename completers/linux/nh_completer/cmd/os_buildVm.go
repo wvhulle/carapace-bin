@@ -17,7 +17,7 @@ func init() {
 
 	common.AddOsRebuildFlags(os_buildVmCmd)
 	os_buildVmCmd.Flags().BoolP("run", "r", false, "Run the VM immediately after building")
-	os_buildVmCmd.Flags().BoolP("with-bootloader", "B", false, "Build with bootloader")
+	os_buildVmCmd.Flags().BoolP("with-bootloader", "B", false, "Build with bootloader. Bootloader is bypassed by default")
 
 	osCmd.AddCommand(os_buildVmCmd)
 }

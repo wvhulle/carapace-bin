@@ -18,5 +18,7 @@ func init() {
 	common.AddOsRebuildFlags(os_buildImageCmd)
 	os_buildImageCmd.Flags().String("image-variant", "", "Image variant")
 
+	os_buildImageCmd.MarkFlagRequired("image-variant")
+
 	osCmd.AddCommand(os_buildImageCmd)
 }

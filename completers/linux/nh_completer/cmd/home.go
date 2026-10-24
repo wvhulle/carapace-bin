@@ -21,8 +21,9 @@ func init() {
 func addHomeRebuildFlags(cmd *cobra.Command) {
 	common.AddCommonRebuildFlags(cmd)
 	common.AddUpdateFlags(cmd)
+	common.AddRemoteBuildHostFlag(cmd)
+
 	cmd.Flags().StringP("backup-extension", "b", "", "Move existing files by backing up with this file extension")
-	cmd.Flags().String("build-host", "", "Build the configuration on a different host over SSH")
 	cmd.Flags().StringP("configuration", "c", "", "Name of the flake homeConfigurations attribute")
 	cmd.Flags().BoolP("no-specialisation", "S", false, "Ignore specialisations")
 	cmd.Flags().Bool("show-activation-logs", false, "Show activation logs")
