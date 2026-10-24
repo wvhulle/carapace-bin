@@ -2,7 +2,7 @@ package cmd
 
 import (
 	"github.com/carapace-sh/carapace"
-	"github.com/carapace-sh/carapace/pkg/style"
+	"github.com/carapace-sh/carapace-bin/completers/linux/nh_completer/cmd/common"
 	"github.com/spf13/cobra"
 )
 
@@ -24,7 +24,7 @@ func init() {
 	os_rollbackCmd.Flags().StringP("to", "t", "", "Rollback to a specific generation number")
 
 	carapace.Gen(os_rollbackCmd).FlagCompletion(carapace.ActionMap{
-		"diff": carapace.ActionValues("always", "auto", "never").StyleF(style.ForKeyword),
+		"diff": common.ActionDiffModes(),
 	})
 
 	osCmd.AddCommand(os_rollbackCmd)
