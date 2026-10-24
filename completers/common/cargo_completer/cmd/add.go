@@ -62,7 +62,7 @@ func init() {
 		}),
 		"git":           git.ActionRepositorySearch(git.SearchOpts{}.Default()),
 		"manifest-path": carapace.ActionFiles(),
-		"package":       action.ActionDependencies(addCmd, true),
+		"package":       action.ActionWorkspaceMembers(addCmd),
 		"path":          carapace.ActionDirectories(),
 		"registry":      action.ActionRegistries(),
 	})

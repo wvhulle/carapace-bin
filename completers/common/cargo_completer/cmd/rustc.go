@@ -55,7 +55,7 @@ func init() {
 		"features":       action.ActionFeatures(rustcCmd).UniqueList(","),
 		"manifest-path":  carapace.ActionFiles(),
 		"message-format": action.ActionMessageFormats(),
-		"package":        action.ActionDependencies(rustcCmd, false),
+		"package":        action.ActionWorkspaceMembers(rustcCmd),
 		"print":          carapace.ActionValues("crate-name", "file-names", "sysroot", "target-libdir", "cfg", "calling-conventions", "target-list", "target-cpus", "target-features", "relocation-models", "code-models", "tls-models", "target-spec-json", "native-static-libs", "stack-protector-strategies", "link-args"),
 		"profile":        action.ActionProfiles(rustcCmd),
 		"test":           action.ActionTargets(rustcCmd, action.TargetOpts{Test: true}),

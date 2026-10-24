@@ -55,7 +55,7 @@ func init() {
 		"features":       action.ActionFeatures(benchCmd).UniqueList(","),
 		"manifest-path":  carapace.ActionFiles(),
 		"message-format": action.ActionMessageFormats(),
-		"package":        action.ActionDependencies(benchCmd, true),
+		"package":        action.ActionWorkspaceMembersAndDependencies(benchCmd, true),
 		"profile":        action.ActionProfiles(benchCmd),
 		"target-dir":     carapace.ActionDirectories(),
 		"test":           action.ActionTargets(benchCmd, action.TargetOpts{Test: true}),

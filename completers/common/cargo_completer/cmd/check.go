@@ -56,7 +56,7 @@ func init() {
 		"features":       action.ActionFeatures(checkCmd).UniqueList(","),
 		"manifest-path":  carapace.ActionFiles(),
 		"message-format": action.ActionMessageFormats(),
-		"package":        action.ActionDependencies(buildCmd, true),
+		"package":        action.ActionWorkspaceMembersAndDependencies(checkCmd, true),
 		"profile":        action.ActionProfiles(checkCmd),
 		"target-dir":     carapace.ActionDirectories(),
 		"test":           action.ActionTargets(checkCmd, action.TargetOpts{Test: true}),

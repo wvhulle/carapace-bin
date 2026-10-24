@@ -59,7 +59,7 @@ func init() {
 		"features":       action.ActionFeatures(buildCmd).UniqueList(","),
 		"manifest-path":  carapace.ActionFiles(),
 		"message-format": action.ActionMessageFormats(),
-		"package":        action.ActionDependencies(buildCmd, true),
+		"package":        action.ActionWorkspaceMembersAndDependencies(buildCmd, true),
 		"profile":        action.ActionProfiles(buildCmd),
 		"target":         rust.ActionTargets(),
 		"target-dir":     carapace.ActionDirectories(),

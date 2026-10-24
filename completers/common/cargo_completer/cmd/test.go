@@ -59,7 +59,7 @@ func init() {
 		"features":       action.ActionFeatures(testCmd).UniqueList(","),
 		"manifest-path":  carapace.ActionFiles(),
 		"message-format": action.ActionMessageFormats(),
-		"package":        action.ActionDependencies(testCmd, true),
+		"package":        action.ActionWorkspaceMembersAndDependencies(testCmd, true),
 		"profile":        action.ActionProfiles(testCmd),
 		"target-dir":     carapace.ActionDirectories(),
 		"test":           action.ActionTargets(testCmd, action.TargetOpts{Test: true}),

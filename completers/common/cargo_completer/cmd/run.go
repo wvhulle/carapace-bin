@@ -42,7 +42,7 @@ func init() {
 		"features":       action.ActionFeatures(runCmd).UniqueList(","),
 		"manifest-path":  carapace.ActionFiles(),
 		"message-format": action.ActionMessageFormats(),
-		"package":        action.ActionDependencies(runCmd, true),
+		"package":        action.ActionWorkspaceMembers(runCmd),
 		"profile":        action.ActionProfiles(runCmd),
 		"target-dir":     carapace.ActionDirectories(),
 	})
