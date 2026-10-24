@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"github.com/carapace-sh/carapace"
+	"github.com/carapace-sh/carapace-bin/completers/linux/nh_completer/cmd/common"
 	"github.com/spf13/cobra"
 )
 
@@ -14,6 +15,7 @@ var home_replCmd = &cobra.Command{
 func init() {
 	carapace.Gen(home_replCmd).Standalone()
 
+	common.AddInstallableFlags(home_replCmd)
 	home_replCmd.Flags().StringP("configuration", "c", "", "Name of the flake homeConfigurations attribute")
 
 	homeCmd.AddCommand(home_replCmd)

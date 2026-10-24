@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"github.com/carapace-sh/carapace"
+	"github.com/carapace-sh/carapace-bin/completers/linux/nh_completer/cmd/common"
 	"github.com/spf13/cobra"
 )
 
@@ -14,6 +15,7 @@ var darwin_replCmd = &cobra.Command{
 func init() {
 	carapace.Gen(darwin_replCmd).Standalone()
 
+	common.AddInstallableFlags(darwin_replCmd)
 	darwin_replCmd.Flags().StringP("hostname", "H", "", "Select this hostname from darwinConfigurations")
 
 	darwinCmd.AddCommand(darwin_replCmd)
