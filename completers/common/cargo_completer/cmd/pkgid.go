@@ -22,6 +22,6 @@ func init() {
 
 	carapace.Gen(pkgidCmd).FlagCompletion(carapace.ActionMap{
 		"manifest-path": carapace.ActionFiles(),
-		"package":       action.ActionDependencies(pkgidCmd, true),
+		"package":       action.ActionWorkspaceMembersAndDependencies(pkgidCmd, true),
 	})
 }

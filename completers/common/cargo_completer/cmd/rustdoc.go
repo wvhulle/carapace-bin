@@ -53,7 +53,7 @@ func init() {
 		"manifest-path":  carapace.ActionFiles(),
 		"message-format": action.ActionMessageFormats(),
 		"output-format":  carapace.ActionValues("html", "json"),
-		"package":        action.ActionDependencies(rustdocCmd, false),
+		"package":        action.ActionWorkspaceMembers(rustdocCmd),
 		"profile":        action.ActionProfiles(rustdocCmd),
 		"target-dir":     carapace.ActionDirectories(),
 		"test":           action.ActionTargets(rustdocCmd, action.TargetOpts{Test: true}),

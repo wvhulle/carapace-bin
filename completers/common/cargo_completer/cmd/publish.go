@@ -36,9 +36,10 @@ func init() {
 	rootCmd.AddCommand(publishCmd)
 
 	carapace.Gen(publishCmd).FlagCompletion(carapace.ActionMap{
+		"exclude":       action.ActionWorkspaceMembers(publishCmd),
 		"features":      action.ActionFeatures(publishCmd).UniqueList(","),
 		"manifest-path": carapace.ActionFiles(),
-		"package":       action.ActionDependencies(publishCmd, false),
+		"package":       action.ActionWorkspaceMembers(publishCmd),
 		"registry":      action.ActionRegistries(),
 		"target-dir":    carapace.ActionDirectories(),
 	})

@@ -26,7 +26,7 @@ func init() {
 
 	carapace.Gen(removeCmd).FlagCompletion(carapace.ActionMap{
 		"manifest-path": carapace.ActionFiles(),
-		"package":       action.ActionDependencies(removeCmd, false),
+		"package":       action.ActionWorkspaceMembers(removeCmd),
 		"target":        action.ActionTargets(removeCmd, action.TargetOpts{}.Default()),
 	})
 

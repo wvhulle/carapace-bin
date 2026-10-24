@@ -38,11 +38,11 @@ func init() {
 	rootCmd.AddCommand(packageCmd)
 
 	carapace.Gen(packageCmd).FlagCompletion(carapace.ActionMap{
-		"exclude":        action.ActionDependencies(packageCmd, false),
+		"exclude":        action.ActionWorkspaceMembers(packageCmd),
 		"features":       action.ActionFeatures(packageCmd).UniqueList(","),
 		"manifest-path":  carapace.ActionFiles(),
 		"message-format": carapace.ActionValues("human", "json"),
-		"package":        action.ActionDependencies(packageCmd, false),
+		"package":        action.ActionWorkspaceMembers(packageCmd),
 		"target-dir":     carapace.ActionDirectories(),
 	})
 }

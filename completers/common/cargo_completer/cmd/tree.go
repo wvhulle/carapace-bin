@@ -53,9 +53,9 @@ func init() {
 		).UniqueList(","),
 		"exclude":       action.ActionWorkspaceMembers(treeCmd).UniqueList(","),
 		"features":      action.ActionFeatures(treeCmd).UniqueList(","),
-		"invert":        action.ActionDependencies(treeCmd, false),
+		"invert":        action.ActionWorkspaceMembersAndDependencies(treeCmd, false),
 		"manifest-path": carapace.ActionFiles(),
-		"package":       action.ActionDependencies(treeCmd, false),
+		"package":       action.ActionWorkspaceMembersAndDependencies(treeCmd, false),
 		"prefix":        carapace.ActionValues("depth", "indent", "none"),
 		"prune":         action.ActionDependencies(treeCmd, false),
 	})

@@ -2,6 +2,7 @@ package action
 
 import (
 	"encoding/json"
+	"fmt"
 	"os"
 	"regexp"
 	"strings"
@@ -33,10 +34,7 @@ type metadataJson struct {
 }
 
 type manifestToml struct {
-	Profile   map[string]struct{}
-	Workspace struct {
-		Members []string
-	}
+	Profile map[string]struct{}
 }
 
 func manifestLocation(cmd *cobra.Command) (string, error) {
@@ -169,9 +167,45 @@ func ActionDependencies(cmd *cobra.Command, includeVersion bool) carapace.Action
 }
 
 func ActionWorkspaceMembers(cmd *cobra.Command) carapace.Action {
-	return parseManifestAction(cmd, func(m manifestToml, args []string) carapace.Action {
-		return carapace.ActionValues(m.Workspace.Members...)
+	return readMetadataAction(cmd, func(m metadataJson, args []string) carapace.Action {
+		return workspaceMemberValues(m)
 	})
+}
+
+func ActionWorkspaceMembersAndDependencies(cmd *cobra.Command, includeVersion bool) carapace.Action {
+	return readMetadataAction(cmd, func(m metadataJson, args []string) carapace.Action {
+		memberNames := make(map[string]bool)
+		for _, pkg := range m.Packages {
+			memberNames[pkg.Name] = true
+		}
+
+		dependencyVals := make([]string, 0)
+		for _, pkg := range m.Packages {
+			for _, dependency := range pkg.Dependencies {
+				if memberNames[dependency.Name] {
+					continue
+				}
+				if includeVersion {
+					dependencyVals = append(dependencyVals, fmt.Sprintf("%v:%v", dependency.Name, strings.TrimLeft(dependency.Req, "^")), dependency.Req)
+				} else {
+					dependencyVals = append(dependencyVals, dependency.Name, dependency.Req)
+				}
+			}
+		}
+
+		return carapace.Batch(
+			workspaceMemberValues(m),
+			carapace.ActionValuesDescribed(dependencyVals...).Unique().Tag("dependencies"),
+		).ToA()
+	})
+}
+
+func workspaceMemberValues(m metadataJson) carapace.Action {
+	vals := make([]string, 0, len(m.Packages)*2)
+	for _, pkg := range m.Packages {
+		vals = append(vals, pkg.Name, pkg.Version)
+	}
+	return carapace.ActionValuesDescribed(vals...).Tag("workspace members")
 }
 
 func ActionMessageFormats() carapace.Action {
